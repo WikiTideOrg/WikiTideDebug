@@ -1,6 +1,6 @@
-# MirahezeDebug
+# WikiForgeDebug
 
-Miraheze developers can use a special HTTP header, X-Miraheze-Debug, to
+WikiForge developers can use a special HTTP header, X-WikiForge-Debug, to
 enable certain debugging features. This Web extension allows you to easily
-inject the header into Miraheze HTTP/S requests. Header injection can be
+inject the header into WikiForge HTTP/S requests. Header injection can be
 toggled via toolbar icon.

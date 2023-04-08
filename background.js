@@ -1,6 +1,6 @@
 /**
  * Copyright 2015, 2016 Ori Livneh <ori@wikimedia.org>
- * Copyright 2022, 2023 Universal Omega <universalomega@miraheze.org>
+ * Copyright 2022, 2023 Universal Omega <universalomega@wikiforge.net>
  *
  * Licensed under the Apache License, Version 2.0 ( the "License" );
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ var debug = {
     enabled: false,
 
     // To which backend shall the request go to?
-    backend: 'test131.miraheze.org',
+    backend: 'mw1.wikiforge.net',
 
     // Toggle state.
     toggle: function ( state ) {
@@ -63,7 +63,7 @@ var debug = {
         }
 
         let requestHeaders = { 
-            header: 'X-Miraheze-Debug', 
+            header: 'X-WikiForge-Debug', 
             operation: debug.enabled ?
                 chrome.declarativeNetRequest.HeaderOperation.SET :
                 chrome.declarativeNetRequest.HeaderOperation.REMOVE,

@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "MirahezeDebug",
-    "description": "Injects 'X-Miraheze-Debug' header to HTTP requests.",
+    "name": "WikiForgeDebug",
+    "description": "Injects 'X-WikiForge-Debug' header to HTTP requests.",
     "author": [
         "Universal Omega",
         "Paladox",
@@ -12,7 +12,7 @@
         "512": "logo.png"
     },
     "action": {
-        "default_title": "X-Miraheze-Debug",
+        "default_title": "X-WikiForge-Debug",
         "default_popup": "popup.html"
     },
     "content_scripts": [
