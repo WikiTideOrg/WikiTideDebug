@@ -22,7 +22,7 @@ var debug = {
     enabled: false,
 
     // To which backend shall the request go to?
-    backend: 'mw1.wikiforge.net',
+    backend: 'test1.wikiforge.net',
 
     // Toggle state.
     toggle: function ( state ) {
