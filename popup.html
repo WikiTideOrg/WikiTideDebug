@@ -7,24 +7,29 @@
   </head>
   <body class="hidden">
     <div class="options">
-      <div>
-        <select class="option" id="backend">
-          <option value="test1.wikiforge.net">test1.wikiforge.net</option>
-          <option value="mw1.wikiforge.net">mw1.wikiforge.net</option>
-          <option value="mw2.wikiforge.net">mw2.wikiforge.net</option>
-          <option value="jobrunner1.wikiforge.net">jobrunner1.wikiforge.net</option>
-          <option value="jobrunner2.wikiforge.net">jobrunner2.wikiforge.net</option>
-        </select>
-      </div>
-    </div>
-    <div class="switch-container">
-      <div class="switch">
-        <input type="checkbox" name="switch" class="switch-checkbox option" id="enabled">
-        <label class="switch-label" for="enabled">
-          <span class="switch-inner"></span>
-          <span class="switch-switch"></span>
-        </label>
-      </div>
+        <div class="input-container">
+            <label class="input-label" for="accessKey">Access Key:</label>
+            <input type="password" class="option access-key-input" id="accessKey" placeholder="Enter Access Key" />
+        </div>
+        <div class="input-container">
+          <label class="input-label" for="backend">Backend:</label>
+          <select class="option backend-dropdown" id="backend">
+            <option value="test1.wikiforge.net">test1.wikiforge.net</option>
+            <option value="mw1.wikiforge.net">mw1.wikiforge.net</option>
+            <option value="mw2.wikiforge.net">mw2.wikiforge.net</option>
+            <option value="jobrunner1.wikiforge.net">jobrunner1.wikiforge.net</option>
+            <option value="jobrunner2.wikiforge.net">jobrunner2.wikiforge.net</option>
+          </select>
+        </div>
+        <div class="switch-container">
+            <label class="switch">
+                <input type="checkbox" name="switch" class="switch-checkbox option" id="enabled" />
+                <span class="switch-label">
+                    <span class="switch-inner"></span>
+                    <span class="switch-switch"></span>
+                </span>
+            </label>
+        </div>
     </div>
   </body>
 </html>

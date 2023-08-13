@@ -33,6 +33,12 @@ var debug = {
         }
     },
 
+    // Get access key required for extension to work.
+    getAccessKey: async function () {
+        const result = await chrome.storage.local.get( [ 'accessKey' ] );
+        return result.accessKey || '';
+    },
+
     // Dim the toolbar icon when inactive.
     updateIcon: function () {
         if ( debug.enabled ) {
@@ -50,7 +56,7 @@ var debug = {
         }
     },
 
-    onMessage: function ( request, sender, sendResponse ) {
+    onMessage: async function ( request, sender, sendResponse ) {
         if ( request.action === 'set' ) {
             debug.toggle( request.enabled );
             debug.backend = request.backend;
@@ -62,16 +68,26 @@ var debug = {
             } );
         }
 
-        let requestHeaders = { 
-            header: 'X-WikiForge-Debug', 
-            operation: debug.enabled ?
-                chrome.declarativeNetRequest.HeaderOperation.SET :
-                chrome.declarativeNetRequest.HeaderOperation.REMOVE,
-            value: debug.backend
-        };
+        let requestHeaders = [ 
+            {
+                header: 'X-WikiForge-Debug',
+                operation: debug.enabled ?
+                    chrome.declarativeNetRequest.HeaderOperation.SET :
+                    chrome.declarativeNetRequest.HeaderOperation.REMOVE,
+                value: debug.backend
+            },
+            {
+                header: 'X-WikiForge-Debug-Access-Key',
+                operation: debug.enabled ?
+                    chrome.declarativeNetRequest.HeaderOperation.SET :
+                    chrome.declarativeNetRequest.HeaderOperation.REMOVE,
+                value: await debug.getAccessKey()
+            }
+        ];
 
         if ( !debug.enabled ) {
-            delete requestHeaders['value'];
+            delete requestHeaders[0]['value'];
+            delete requestHeaders[1]['value'];
         }
 
         chrome.declarativeNetRequest.updateDynamicRules( {
@@ -81,7 +97,7 @@ var debug = {
                     priority: 1,
                     action: {
                         type: 'modifyHeaders',
-                        requestHeaders: [ requestHeaders ],
+                        requestHeaders: requestHeaders,
                     },
                     condition: {
                         regexFilter: '|http*',
