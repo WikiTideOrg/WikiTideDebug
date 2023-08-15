@@ -23,7 +23,6 @@ document.addEventListener( 'DOMContentLoaded', async function () {
   // Handling for access key input
   var accessKeyInput = document.getElementById( 'accessKey' );
   accessKeyInput.addEventListener( 'input', function () {
-      let accessKey = accessKeyInput.value;
       chrome.storage.local.set( { accessKey: accessKeyInput.value } );
       onUpdate(); // Trigger the update function when access key changes
   } );
