@@ -67,7 +67,7 @@ const debug = {
 			});
 		}
 
-		const requestHeaders = [
+		let requestHeaders = [
 			{
 				header: 'X-WikiTide-Debug',
 				operation: debug.enabled ?
