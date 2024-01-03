@@ -13,54 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-( function () {
-    'use strict';
+(() => {
+	'use strict';
 
-    // Equivalent to `mw.config.get( 'wgRequestId' )`. We have to scrape the value
-    // from the script source because Chrome extension content scripts do not share
-    // an execution environment with other JavaScript code.
-    function getRequestId() {
-        var nodes = document.querySelectorAll( 'script' ), i, match;
+	// Equivalent to `mw.config.get( 'wgRequestId' )`. We have to scrape the value
+	// from the script source because Chrome extension content scripts do not share
+	// an execution environment with other JavaScript code.
+	const getRequestId = () => {
+		const nodes = document.querySelectorAll('script');
+		let match;
 
-        for ( i = 0; i < nodes.length; i++ ) {
-            match = /"wgRequestId":\s*"([^"]+)"/.exec( nodes[i].innerText );
-            if ( match ) {
-                return match[1];
-            }
-        }
-    }
+		for (const node of nodes) {
+			match = /"wgRequestId":\s*"([^"]+)"/.exec(node.innerText);
+			if (match) {
+				return match[1];
+			}
+		}
+	};
 
-    // Insert an item to the footer menu at the bottom of the page.
-    function addFooterPlace( caption, url ) {
-        var a, li, ul;
+	// Insert an item into the footer menu at the bottom of the page.
+	const addFooterPlace = (caption, url) => {
+		const a = document.createElement('a');
+		a.className = 'noprint';
+		a.href = url;
+		a.innerText = caption;
 
-        a = document.createElement( 'a' );
-        a.className = 'noprint';
-        a.href = url;
-        a.innerText = caption;
+		const li = document.createElement('li');
+		li.id = `footer-places-${caption.toLowerCase().replace(/\W/g, '-')}`;
+		li.appendChild(a);
 
-        li = document.createElement( 'li' );
-        li.id = 'footer-places-' + caption.toLowerCase().replace( /\W/g, '-' );
-        li.appendChild( a );
+		const ul = document.querySelector('#footer-places, .footer-places');
+		if (ul) {
+			ul.appendChild(li);
+		}
+	};
 
-        ul = document.querySelector( '#footer-places, .footer-places' );
-        if ( ul ) {
-            ul.appendChild( li );
-        }
-    }
+	chrome.runtime.sendMessage({ action: 'get' }, (response) => {
+		let reqId;
 
-    chrome.runtime.sendMessage( { action: 'get' }, function ( response ) {
-        var reqId;
+		if (!response.enabled || !(response.log || response.profile)) {
+			return;
+		}
 
-        if ( !response.enabled || !( response.log || response.profile ) ) {
-            return;
-        }
+		reqId = getRequestId();
+		if (!reqId) {
+			return;
+		}
 
-        reqId = getRequestId();
-        if ( !reqId ) {
-            return;
-        }
+		// Additional logic can be added here based on your requirements.
 
-    } );
+	});
 
-} () );
+})();
