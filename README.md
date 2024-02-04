@@ -1,3 +1,6 @@
+# ARCHIVED
+See [miraheze/MirahezeDebug](https://github.com/miraheze/MirahezeDebug)
+
 # WikiTideDebug
 
 WikiTide developers can use a special HTTP header, X-WikiTide-Debug, to
